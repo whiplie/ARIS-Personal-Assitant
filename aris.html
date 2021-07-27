@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.R.I.S</title>
+    <link rel="stylesheet" href="aris.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@200&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div>
+        <h1 class="alice">A.R.I.S</h1>
+        <h2 class="acro">Artificial Response and Inteligence System</h2>
+    </div>
+  
+    
+    <img src="arisbackground.gif" alt="arisbackground" class="center">
+
+    <h3 class="content"></h3>
+
+    <script>
+        //js start
+        //variable list
+        //let messages = Application('Messages.app');
+        //let messagesWindow = messages.windows[0];
+        
+        
+        const content = document.querySelector('.content');
+        
+        var today = new Date();
+        
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        
+        
+        if (today.getHours() < 12){
+            var meridiem = ('a m')
+        }
+        else {     
+            var meridiem = ('p m')
+        }
+        
+        var time = (today.getHours() % 12) + ":" + today.getMinutes() + (meridiem);
+        
+        var googleString = ('https://www.google.com/search?q=')
+        
+        const YouTube = [
+            'opening youtube sir'
+    ];
+        const Amazon = [
+            'opening amazon sir'
+    ]; 
+        const Google = [
+            'opening google sir'
+    ]; 
+        const homeEmail = [
+            'right away sir opening your home email'
+    ]; 
+        const schoolEmail = [
+            'right away sir opening your school email'
+    ]; 
+        const Weather = [
+            'of course sir, here is your weather debriefing for the day'
+    ]; 
+        const greetingA = [
+            'hello sir. awaiting further instruction.'
+    ];  
+        const greetingB = [
+            'excellent as always sir.'
+    ]; 
+        const greetingC = [
+            ('powering up. systems online. today is... ' + date + '... and the local time is' + time + '... your weather report for the day is on the screen. awaiting further orders.')
+    ]; 
+        
+        var song = new Audio('startupsounds.wav');
+       
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition =  new SpeechRecognition();
+
+        recognition.onstart = function(){
+            console.log('yes sir?');
+        }
+        recognition.onresult = function (event) {
+            const current = event.resultIndex; 
+
+            const transcript = event.results[current][0].transcript;
+            content.textContent = transcript;
+            readOutLoud(transcript);
+
+        };
+        
+        document.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                recognition.start();
+            }
+        });
+
+        function readOutLoud(message){
+            const speech = new SpeechSynthesisUtterance();
+            var lowerMessage = message.toLowerCase();
+            speech.text = 'your request... ' + (message) + ' ... came back inconplete. instead try searching for... ' + (message);
+            if (lowerMessage.includes('amazon')){
+                speech.text = Amazon;
+                window.open('https://www.amazon.com')
+                }
+
+            if (lowerMessage.includes('google')){
+                speech.text = Google; 
+                window.open('https://www.google.com')
+                }
+
+            if (lowerMessage.includes('youtube')){
+                speech.text = YouTube; 
+                window.open('https://www.youtube.com')
+                }
+
+            if (lowerMessage.includes('home')){
+                speech.text = homeEmail; 
+                window.open('https://mail.google.com/mail/u/0/')
+                }
+
+            if (lowerMessage.includes('school')){
+                speech.text = schoolEmail; 
+                window.open('https://mail.google.com/mail/u/1/')
+                }
+
+            if (lowerMessage.includes('weather')){
+                speech.text = Weather; 
+                window.open('https://www.google.com/search?q=weather')
+                }
+            
+            if (lowerMessage.includes('hi') || message.includes('hello') || message.includes('hey')){
+                speech.text = greetingA;
+                
+                }
+        
+            if (lowerMessage.includes('feeling','how')){
+                speech.text = greetingB; 
+                }
+            
+            if (lowerMessage.includes('start') || message.includes('boot') || message.includes('initiate') || message.includes('begin') || message.includes('system') || message.includes('systems')){
+                song.play();
+                speech.text = greetingC; 
+                setTimeout(() => {window.open('https://www.google.com/search?q=weather&rlz=1C5CHFA_enAU957AU957&sxsrf=ALeKk006lWiQxV4cM4E7E-cmPBP3Fo_2Xw%3A1625627095533&ei=1xnlYOL4H5iE4-EP7fuu4AU&oq=weather&gs_lcp=Cgdnd3Mtd2l6EAMyBwgAELEDEEMyCggAELEDEIMBEEMyBQgAEJECMgUIABCRAjIHCAAQyQMQQzIFCAAQkgMyBAgAEEMyBAgAEEMyBQgAELEDMgQIABBDOgcIIxDqAhAnOgQIIxAnSgQIQRgAUNAtWMc0YLg1aAFwAngAgAHjAYgBmgmSAQUwLjMuM5gBAKABAaoBB2d3cy13aXqwAQrAAQE&sclient=gws-wiz&ved=0ahUKEwiiwMPs_M_xAhUYwjgGHe29C1wQ4dUDCA4&uact=5'); }, 8500);
+                }
+
+            if (lowerMessage.includes('stocks') || message.includes('stock') || message.includes('watchlist')){
+                speech.text = 'opening stocks watchlist now sir'; 
+                window.open('https://www.marketwatch.com/watchlist?mod=top_nav') 
+                
+                }
+                
+            if (lowerMessage.includes('time') || message.includes('day') || message.includes('today')){
+                speech.text = ('today is... ' + date + '... and the local time is' + time);
+                
+                }    
+                
+                //if (lowerMessage.includes('message') || message.includes('messages')){
+                //speech.text = 'opening messages'; 
+                //messages.activate(); 
+                
+                //}
+                
+                
+
+
+            if (lowerMessage.includes('search')){
+                speech.text = ('searching secure database');
+                const searchArray = message.split(' ');
+                console.log(searchArray)
+                let searchString = ("");
+
+                var arrayLength = searchArray.length;
+                console.log(arrayLength)
+                for (var i = 0; i < arrayLength; i++) {
+                    console.log(searchArray[i]);
+                    searchString = searchString.concat(searchArray[i]);
+                    searchString = searchString.concat("+");
+                    console.log(searchString);
+                    
+                }
+                const googleAddress = googleString.concat(searchString);
+                console.log(googleAddress);
+                window.open(googleAddress);
+                }
+
+            speech.volume = 1;
+            speech.rate = 1.1;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</body>
+</html>
