@@ -1,0 +1,68 @@
+.alice{
+	color: white;
+	text-align: center;
+	font-family: 'MuseoModerno', cursive;
+	font-size: 50px;
+	padding-top: 20px;
+	line-height: 20px;
+}
+
+.acro{
+	color: white;
+	text-align: center;
+	font-family: 'MuseoModerno', cursive;
+	font-size: 30px;
+	padding-bottom: 0px;
+}
+
+body{
+    background-color: black;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.center{
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+  	width: 50%;
+
+}
+
+.talk{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 5%;
+	background-color: black;
+	font-size: 18px;
+	color: white;
+	text-align: center;
+	font-family: 'MuseoModerno', cursive;
+	padding: 5px;
+	border: 2px solid white;
+	border-radius: 20px;
+}
+
+.start{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 5%;
+	background-color: black;
+	font-size: 18px;
+	color: white;
+	text-align: center;
+	font-family: 'MuseoModerno', cursive;
+	padding: 5px;
+	border: 2px solid white;
+	border-radius: 20px;
+}
+
+.content {
+	color: white;
+	text-align: center;
+	font-family: 'MuseoModerno', cursive;
+	font-size: 30px;
+}
